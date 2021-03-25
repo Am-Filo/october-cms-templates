@@ -1,0 +1,20 @@
+title = "Umi"
+url = "/"
+layout = "umi"
+is_hidden = 0
+
+[post]
+slug = "{{ :slug }}"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+==
+{% partial "all_pages/header" %}
+<section>
+	<div class="container">
+		<div class="row">
+			{% component 'post' %}
+		</div>
+	</div>
+</section>

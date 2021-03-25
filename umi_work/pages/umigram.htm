@@ -1,0 +1,161 @@
+title = "Umigram"
+url = "/umigram"
+layout = "umi"
+description = "Umigram - это бесплатные лайки для ваших постов в Instagram.
+Простота в работе и в дизайне.
+Не требуется вход на сайт через аккаунт instagram, достаточно скопировать ссылку вашего поста и лайки пошли!"
+meta_title = "Umigram"
+meta_description = "Umigram - это бесплатные лайки для ваших постов в Instagram.
+Простота в работе и в дизайне.
+Не требуется вход на сайт через аккаунт instagram, достаточно скопировать ссылку вашего поста и лайки пошли!"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+forceSecure = 0
+==
+<?php
+function onStart()
+{
+	//$this['status'] = 0;
+}
+function onTest()
+{
+	$url = input('url');
+	
+	try {
+			$api = file_get_contents("http://api.instagram.com/oembed?url=".$url);
+			$errors = false;
+		}
+		catch (Exception $api) {
+			$this['like_user'] = 0;
+			$errors = true;
+		}
+
+		if($errors == false)
+		{
+			$apiObj = json_decode($api,true);
+			$author_id = $apiObj['author_id'];
+			$media_id = $apiObj['media_id'];
+			$author_name = $apiObj['author_name'];
+			$author_url = $apiObj['author_url'];
+			$thumbnail_url = $apiObj['thumbnail_url'];
+
+			if(Db::select('select * from inst_profiles where user_id = ?', [$author_id]))
+			{
+				$count_visits = DB::table('inst_profiles')->where('user_id', $author_id)->pluck('visits');
+				Db::update('update inst_profiles set visits = '.($count_visits+1).' where user_id = ?',[$author_id]);
+
+				$count = DB::table('inst_profiles')->where('user_id', $author_id)->pluck('count');
+
+				if($count == 0) {$this['count_user'] = $count;}
+				else
+				{
+					$this['count_user'] = $count;
+					//$this['like_user'] = 1;
+					Db::update('update inst_profiles set count = '.($count-1).',visits = '.($count_visits+1).' where user_id = ?', [$author_id]);
+				}
+				
+				if(Db::select('select * from inst_photo where media_id = ?', [$media_id]))
+				{
+					$count_visits_photo = DB::table('inst_photo')->where('media_id', $media_id)->pluck('count_visit');
+					Db::update('update inst_photo set count_visit = '.($count_visits_photo+1).' where media_id = ?',[$media_id]);
+
+					$count_photo = DB::table('inst_photo')->where('media_id', $media_id)->pluck('count');
+					
+					if($count_photo == 0) {$this['count_photo'] = $count_photo;}
+					else
+					{
+						$this['count_photo'] = $count_photo;
+						//$this['like_user'] = 1;
+						Db::update('update inst_photo set count = '.($count_photo-1).',count_visit = '.($count_visits_photo+1).' where media_id = ?', [$media_id]);
+					}
+				}
+				else
+				{
+					Db::insert('insert into inst_photo (user_name, user_id, media_id, link_photo, count, count_visit, banned) values (?, ?, ?, ?, ?, ?, ?)', [$author_name,$author_id,$media_id, $thumbnail_url, 1, 1, 0]);
+					$this['count_photo'] = 2;
+				}
+			}
+			else
+			{
+				Db::insert('insert into inst_profiles (user_name, user_id, user_link, count, visits, banned, vip) values (?, ?, ?, ?, ?, ?, ?)', [$author_name,$author_id,$author_url,9, 1, 0, 0]);
+				Db::insert('insert into inst_photo (user_name, user_id, media_id, link_photo, count, count_visit, banned) values (?, ?, ?, ?, ?, ?, ?)', [$author_name,$author_id,$media_id,$thumbnail_url,1, 1, 0]);
+				$this['count_user'] = 10;
+				$this['count_photo'] = 2;
+			}
+			
+			if(DB::table('inst_profiles')->where('user_id', $author_id)->pluck('vip') == 1){
+				$this['count_user'] = 100;
+				$this['count_photo'] = 100;
+				$this['status'] = 1;
+			}
+			else $this['status'] = 0;
+			
+			$homepage = file_get_contents('http://194.58.115.48/add?id='.$media_id);
+			$this['like_user'] = 1;
+			$this['thumbnail_url'] = $thumbnail_url;
+			$this['author_url'] = $author_url;
+			$this['author_name'] = $author_name;
+			$this['rzz'] = $homepage;
+			$this['urlus'] = $url;
+			$this['result'] = $media_id;
+			
+			//$this['status'] = 1;
+			$this['result1'] = 1;
+		}
+		else
+		{
+			$this['like_user'] = 0;
+			$this['status'] = 0;
+			$this['result1'] = 1;
+		}
+	
+	//$this['result'] = 'http://ud.esy.es/profile/instalike?userurl='.$url;
+	//header('Location: /profile/instalike?userurl='.$url);
+}
+?>
+==
+{% partial "all_pages/header" %}
+<section>
+	<div class="container">
+		<div class="row">
+			<div id="result"> 
+				{% if user %}
+				
+				{% partial "calcresult" %}
+				
+				{% else %}
+				<div class="col-md-12 post">
+					<h3 class="post_title">
+					</h3>
+					<hr>
+					<div class="col-md-6 col-md-offset-2 bpa">
+						<h3>Для просмотра этой записи войдите в свой аккаунт</h3>
+						<small>У вас нет аккаунта? - пройдите <a onclick="UModal();" id="umreg">регистрацию</a></small>
+					</div>
+					<div class="col-md-3">
+						<form data-request="onSignin">
+							<div class="form-group">
+								<label for="userSigninLogin">Email</label>
+								<input name="login" type="text" class="form-control" id="userSigninLogin" placeholder="Enter your email">
+							</div>
+
+							<div class="form-group">
+								<label for="userSigninPassword">Password</label>
+								<input name="password" type="password" class="form-control" id="userSigninPassword" placeholder="Enter your password">
+							</div>
+
+							<button type="submit" class="btn btn-default">Sign in</button>
+						</form>	</div>
+						<div class="col-md-12">
+							<hr>
+						</div>
+					</div>
+					{% endif %}
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>

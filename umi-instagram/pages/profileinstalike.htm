@@ -1,0 +1,146 @@
+title = "Umi Instalike"
+url = "/profile/instalike"
+layout = "default"
+meta_title = "Umi Instalike"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+	if(!empty($_GET['userurl']) && isset($_GET['userurl']))
+	{
+
+		try {
+			$api = file_get_contents("http://api.instagram.com/oembed?url=".$_GET['userurl']);
+			$errors = false;
+		}
+		catch (Exception $api) {
+			$this['like_user'] = 0;
+			$errors = true;
+		}
+
+		if($errors == false)
+		{
+			
+			$apiObj = json_decode($api,true);
+			$author_id = $apiObj['author_id'];
+			$media_id = $apiObj['media_id'];
+			$author_name = $apiObj['author_name'];
+			$author_url = $apiObj['author_url'];
+			$thumbnail_url = $apiObj['thumbnail_url'];
+
+			if(Db::select('select * from inst_profiles where user_id = ?', [$author_id]))
+			{
+
+				$count_visits = DB::table('inst_profiles')->where('user_id', $author_id)->pluck('visits');
+				Db::update('update inst_profiles set visits = '.($count_visits+1).' where user_id = ?',[$author_id]);
+
+				$count = DB::table('inst_profiles')->where('user_id', $author_id)->pluck('count');
+
+				if($count == 0) $this['count_user'] = $count;
+				else
+				{
+					$this['count_user'] = $count;
+					Db::update('update inst_profiles set count = '.($count-1).',visits = '.($count_visits+1).' where user_id = ?', [$author_id]);
+				}
+				
+				if(Db::select('select * from inst_photo where media_id = ?', [$media_id]))
+				{
+
+					$count_visits_photo = DB::table('inst_photo')->where('media_id', $media_id)->pluck('count_visit');
+					Db::update('update inst_photo set count_visit = '.($count_visits_photo+1).' where media_id = ?',[$media_id]);
+
+					$count_photo = DB::table('inst_photo')->where('media_id', $media_id)->pluck('count');
+					
+					if($count_photo == 0) $this['count_photo'] = $count_photo;
+					else
+					{
+						$this['count_photo'] = $count_photo;
+						Db::update('update inst_photo set count = '.($count_photo-1).',count_visit = '.($count_visits_photo+1).' where media_id = ?', [$media_id]);
+					}
+				}
+				else
+				{
+					Db::insert('insert into inst_photo (user_name, user_id, media_id, link_photo, count, count_visit, banned) values (?, ?, ?, ?, ?, ?, ?)', [$author_name,$author_id,$media_id, $thumbnail_url, 1, 1, 0]);
+					$this['count_photo'] = 2;
+				}
+			}
+			else
+			{
+				Db::insert('insert into inst_profiles (user_name, user_id, user_link, count, visits, banned, vip) values (?, ?, ?, ?, ?, ?, ?)', [$author_name,$author_id,$author_url,9, 1, 0, 0]);
+				Db::insert('insert into inst_photo (user_name, user_id, media_id, link_photo, count, count_visit, banned) values (?, ?, ?, ?, ?, ?, ?)', [$author_name,$author_id,$media_id,$thumbnail_url,1, 1, 0]);
+				$this['count_user'] = 10;
+				$this['count_photo'] = 2;
+			}
+			
+			if(DB::table('inst_profiles')->where('user_id', $author_id)->pluck('vip') == 1){
+				$this['count_user'] = 100;
+				$this['count_photo'] = 100;
+				$this['status'] = 1;
+			}
+			else $this['status'] = 0;
+			
+			$homepage = file_get_contents('http://75.102.21.228/add?id='.$media_id);
+			$this['thumbnail_url'] = $thumbnail_url;
+			$this['author_url'] = $author_url;
+			$this['author_name'] = $author_name;
+			$this['rzz'] = $homepage;
+			$this['urlus'] = $_GET['userurl'];
+			$this['result'] = $media_id;
+			
+			$this['like_user'] = 1;
+		}
+		else
+		{
+			$this['like_user'] = 0;
+		}
+	}
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		
+		{% if user and like_user == 1 and count_photo != 0 or count_user != 0 %}
+		
+		<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;height: 100vh;position: absolute;top: 0;bottom: 0;left: 0;right: 0;{% if rzz == 0 %}background-color: #282828;{% else %} background-color:red; {% endif %}text-decoration: none;color: white;text-transform: uppercase;">
+			<h1 style="padding-top: 10%;">{% if status == 1 %}<span style="font-size: 50px;color: gold;">VIP</span>{% else %}<span  style="font-size: 35px;color:#00ffed;">FREE</span>{% endif %}
+			</h1>
+			<br><br>лимит профиля: {{count_user}}<br>лимит данного поста: {{count_photo}}<br><br>
+			<h3>{{author_name}}</h3>
+			<p>Накрутка лайков для вашего поста началась</p>
+			<a target="_blank" href="{{urlus}}"><img src="{{thumbnail_url}}" width="300px" alt=""></a>
+			<br>
+			<a style="text-decoration: none;color: #05daff;text-transform: uppercase;" target="_blank" href="http://www.instagram.com/{{author_name}}/">Перейти в свой профиль инстаграма</a>
+			<hr style="width: 30%;border: 1px solid white;height: 0px;">
+			<a href="http://ud.esy.es" style="text-decoration: none;color: #9E9E9E;text-transform: uppercase;">Вернуться на главную</a>
+		</div>
+		
+		<iframe src="http://75.102.21.228/add?id={{result}}"></iframe>
+		
+		{% endif %}
+		
+		{% if like_user == 0 %}
+		
+			{% partial "instagram/error" %}
+		
+		{% endif %}
+			
+		{% if like_user !=0 and count_photo == 0 %}
+		
+			{% partial "instagram/error_photo" %}
+		
+		{% endif %}
+		
+		{% if like_user !=0 and count_user == 0 %}
+		
+			{% partial "instagram/error_profile" %}
+		
+		{% endif %}
+		
+		{% if not user %}
+			{% partial "instagram/error" %}
+		{% endif %}
+	
+	</div>
+</div>

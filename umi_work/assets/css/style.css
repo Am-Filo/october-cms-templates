@@ -1,0 +1,445 @@
+body{
+	background-color: #2f2f2f;
+}
+
+.post_creater{
+	padding: 0;
+	background-color: indianred;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 0px 10px 10px 0px;
+}
+
+.avatar-container{
+	padding: 0;
+}
+
+.img-circle{
+	background-image: url(http://s4.favim.com/orig/140413/girl-hipster-rainbow-smoke-Favim.com-1663086.jpg);
+	height: 55px;
+	background-position: center;
+	width: 55px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: auto;
+}
+
+.info-post-creater{
+	padding: 0;
+}
+
+.info-creater-n{
+	cursor: context-menu;
+	color: white;
+	font-family: Champagne;
+}
+
+.tags > a {
+	cursor: pointer;
+	color: white;
+	font-family: Champagne;
+	text-decoration: none;
+}
+
+.tags > a:hover {
+	color: #00ff04;
+}
+
+.tags {
+	padding: 0;
+	cursor: context-menu;
+	font-family: Champagne;
+	color: white;
+	font-variant: small-caps;
+}
+
+.top_section{
+	text-align: center;
+	height: 100vh;
+}
+
+.title {
+	font-size: 5em;
+	background: indianred;
+	margin: 0;
+	cursor: context-menu;
+	color: white;
+	border: 0.5px solid indianred;
+	border-radius: 5px;
+}
+
+.sec_title{
+	color: white;
+	position: relative;
+	-webkit-animation: go-left-right 3s infinite alternate;
+	animation: go-left-right 3s infinite alternate;
+}
+
+.bpa > h3{
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 1.3 !important;
+	cursor: context-menu;
+}
+.bpa > small > a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.bpa > small{
+	cursor: context-menu;
+}
+
+.title_404{
+	font-size: 15em;
+	background-color: indianred;
+	border-radius: 5px;
+	text-align: center;
+	padding: 0;
+	margin: 50px 0px 0px 0px;
+}
+
+.sec_title_404{
+	font-size: 2em;
+	color: indianred;
+}
+
+.button_404 {
+	color: #333333;
+	font-size: 5em;
+}
+.button_404:hover {
+	text-decoration: none;
+	color: #5ccdb9;
+}
+
+.button_wrap{
+	background-color: indianred;
+	border-radius: 5px;
+	padding: 0px 50px;
+}
+
+.cont{
+	font-family: Champagne;
+	font-variant: small-caps;
+	margin-top: 15%;
+}
+
+.nav_head{
+	margin-top: 15%;
+	color: indianred;
+	padding-bottom: 10%;
+}
+
+.view_btn{
+	transition: 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+	background: none;
+	color: white;
+	border: 0.5px solid #714e4e;
+	padding: 5px 30px 5px 30px;
+	font-size: 1em;
+}
+
+.view_btn:hover{
+	transition: 0.9s ease-out;
+	color: #d47e6a;
+	border: 0.5px solid #cd5c5c;
+}
+
+.view_btn:focus{
+	text-decoration: none;
+	outline: none;
+	color: #d47e6a;
+	border: 0.5px solid #cd5c5c;
+}
+
+.view_btn:active{
+	outline: none;
+}
+.view_btn:visited{
+	outline: none;
+}
+.img_cont{
+	width: 100%;
+}
+.post{
+	background-color: white;
+	border-radius: 5px;
+	margin-bottom: 10%;
+	padding: 0;
+	transition: 0.5s cubic-bezier(0.4, 0, 1, 1);
+}
+.post:hover {
+	-webkit-box-shadow: 0px 0px 20px 7px rgba(0,0,0,1);
+	-moz-box-shadow: 0px 0px 20px 7px rgba(0,0,0,1);
+	box-shadow: 0px 0px 20px 7px rgba(0,0,0,1);
+	-webkit-transform: scale(1.02,1.02);
+	-webkit-transition-duration: 550ms;
+	-moz-transform: scale(1.02,1.02);
+	-moz-transition-duration: 550ms;
+}
+
+.s_title_info {
+	text-align: center;
+	color: #797679;
+	font-size: 15px;
+	width: 50%;
+	margin-left: 25%;
+	margin-top: 20px;
+}
+
+.post_title{
+	text-align: center;
+	font-size: 3em;
+	padding: 0;
+	margin: 0px 0px 0px 0px;
+	background-color: #cd5c5c;
+	border-radius: 5px 5px 0px 0px;
+	color: white;
+	line-height: 1.5;
+}
+
+.post_title > a{
+	text-decoration: none;
+	font-size: 0.9em;
+	transition: 0.9s ease-out;
+	color: white;
+	cursor: pointer;
+}
+
+.post_title > a:hover{
+	text-decoration: none;
+	color: #faffbd;
+}
+
+.images{
+	text-align: center;
+	padding: 0;
+	height: 60%;
+	/*background-attachment: fixed !important;*/
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-position: center !important;
+}
+.images-gallery {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.gallery-div{
+	height: 30%;
+	background-repeat: no-repeat !important;
+	background-size: cover !important;
+	background-position: center !important;
+}
+
+.fancybox{
+	margin-left: -5px;
+}
+
+.fancybox > img {
+	width: 33%;
+}
+
+.s_in{
+	color: indianred;
+}
+
+label {
+   color: indianred;
+}
+
+input#userSigninLogin {
+    background: none;
+    border-radius: 5px;
+    border-color: indianred;
+    color: indianred;
+}
+
+input#registerName {
+    background: none;
+    border-radius: 5px;
+    border-color: indianred;
+    color: indianred;	
+}
+
+input#registerEmail{
+    background: none;
+    border-radius: 5px;
+    border-color: indianred;
+    color: indianred;
+}
+input#registerPassword{
+	background: none;
+	border-radius: 5px;
+	border-color: indianred;
+	color: indianred;
+}
+
+input#userSigninPassword {
+    background: none;
+    border-radius: 5px;
+    border-color: indianred;
+    color: indianred;
+}
+
+#mainmenu {
+	position: relative;
+	overflow: hidden;
+	border-radius: 30px;
+	margin-bottom: 10px;
+}
+
+#mainmenu ul {
+	list-style: none;
+	padding: 0;
+	position: relative;
+	left: 50%;
+	float: left;
+}
+
+#mainmenu ul li {
+    position: relative;
+    left: -50%;
+    float: left;
+    margin: 0 10px;
+    border-radius: 5px;
+    list-style-type: none;
+    padding: 7px 0px 7px 0px;
+    color: white;
+    transition: 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 0.5px solid rgba(113, 78, 78, 0);
+}
+
+#mainmenu > ul > li >a {
+	color: white;
+	padding: 10px 20px 10px 20px;
+	text-decoration: none;
+}
+
+#mainmenu > ul > li >a:hover {
+    color: #ffffff;
+    transition: 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#mainmenu ul li:hover {
+	color: #ffffff;
+	transition: 0.9s ease-out;
+	border: 0.5px solid #cd5c5c;
+}
+	
+li.active {
+	background: indianred;
+}
+
+.search_ico{
+	color: #2f2f2f;
+	cursor: pointer;
+}
+
+.search_ico:hover{
+	color: white;
+	cursor: pointer;
+}
+.input_search_tag{
+	width: 90%;
+	border-radius: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border: none;
+	background: #2f2f2f;
+	outline: none;
+}
+
+.search_panel{
+	font-size: 1em;
+	background: indianred;
+	cursor: context-menu;
+	color: indianred;
+	border: 0.5px solid indianred;
+	border-radius: 15px;
+	margin-top: 30px;
+	padding: 0px 0px 0px 0px;
+	float: center;
+}
+
+.player{
+  position:relative;
+  margin: 0;
+  text-align:center;
+  font-family:Helvetica, Arial;
+}
+.playpause{
+  border: 1px solid #cd5c5c;
+  cursor: pointer;
+  background: none;
+  padding: 12px 0;
+  border-radius: 0px !important;
+  color: #888;
+  font-size: 12px;
+  height: 40px
+}
+.playpause:hover{
+  border-color: #ccc;
+}
+.volume,.progressbar{
+  border:none; 
+  height:2px;
+}
+.volume{
+		background: hsla(0, 53%, 58%,1);
+    height: 20px;
+    border-radius: 0px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    font-family: Champagne;
+    font-variant: small-caps; 
+}
+.progressbar{
+    background: INDIANRED;
+    border-radius: 0;
+    border: none;
+    height: 20px;
+}
+.ui-slider-handle{
+  border-radius: 0px !important;
+  border: none !important;
+  background: #ffffff !important;
+  top: 0px !important;
+  width: 5px !important;
+  height: 20px !important;
+  margin-left: -5px !important;
+  outline: none !important;
+}
+
+.name_music{
+	margin-left: 15px;
+	padding-top: 10px;
+}
+
+.music_container{
+	padding-bottom: 10px;
+}
+
+
+@keyframes go-left-right {   /* назовём анимацию: "go-left-right" */
+    from {
+      left: calc(-2%);               /* от: left: 0px */
+    }
+    to {
+      left: calc(2%); /* до: left: 100%-50px */
+    }
+  }
+
+  /* Префикс для Chrome, Opera, Safari */
+  @-webkit-keyframes go-left-right {
+    from {
+      left: calc(-2%);
+    }
+    to {
+      left: calc(2%);
+    }
+  }

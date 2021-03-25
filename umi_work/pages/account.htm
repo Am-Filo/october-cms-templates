@@ -1,0 +1,42 @@
+title = "Account"
+url = "/account"
+layout = "umi"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+==
+{% partial "all_pages/header" %}
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+					{% if not user %}
+
+						<div class="row">
+						
+							<div class="col-md-6">
+								<h3 class="s_in">Sign in</h3>
+									{% partial account ~ '::signin' %}
+							</div>
+						
+							<div class="col-md-6">
+								<h3 class="s_in">Register</h3>
+									{% partial account ~ '::register' %}
+							</div>
+						
+						</div>
+						
+						{% else %}
+						
+						{% partial account ~ '::activation_check' %}
+						
+						{% partial account ~ '::update' %}
+						
+						{% partial account ~ '::deactivate_link' %}
+						
+						{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

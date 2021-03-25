@@ -1,0 +1,15 @@
+[viewBag]
+==
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta name="description" content="{{ this.page.meta_description|default(this.theme.description) }}">
+<meta name="keywords" content="{{ this.theme.keywords }}">
+<meta name="author" content="{{ this.theme.website_author }}">
+<title>{{ this.page.meta_title|default(this.page.title) }}</title>
+<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+<link href="{{ ['assets/libr/fancybox/jquery.fancybox.css','assets/libr/font-awesome-4.7.0/css/font-awesome.min.css','assets/libr/bootstrap/bootstrap.min.css', 'assets/css/style.css', 'assets/libr/bootstrap/bootstrap-theme.min.css','assets/css/fonts.css','assets/css/media-queres.css','assets/css/about-me.css']|theme }}" rel="stylesheet">
+{% styles %}
+<!-- <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ad255f6e16bd04b6c44688e87202257c6e9e7538f9a500c5eb80394e0184be23f&amp;width=100%25&amp;height=668&amp;lang=ru_RU&amp;scroll=true;id=mymap"></script>
+ -->
+ <script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A834e99a97453487e0b040c9619bf7aa54450e75709460b9dc67802e2e589b9c8&amp;id=mymap"></script>

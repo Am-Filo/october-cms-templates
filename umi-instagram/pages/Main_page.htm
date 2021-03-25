@@ -1,0 +1,41 @@
+title = "Umi Instagram"
+url = "/"
+layout = "default"
+meta_title = "Umi Instagram"
+is_hidden = 0
+
+[account]
+redirect = "Main_page"
+paramCode = "code"
+forceSecure = 0
+
+[account account2]
+paramCode = "code"
+forceSecure = 0
+==
+<?php
+function onTest()
+{
+	$url = input('url');
+	$this['result1'] = 1;
+	$this['result'] = 'http://ud.esy.es/profile/instalike?userurl='.$url;
+	//header('Location: /profile/instalike?userurl='.$url);
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;height: 100vh;position: absolute;top: 0;bottom: 0;left: 0;right: 0;background-color: #282828;text-decoration: none;color: white;text-transform: uppercase;">
+			<div id="result" style="margin-top: 20%;"> 
+				{% if user %}
+				{% partial "calcresult" %}
+				{% else %}
+				<h3>Sign in</h3>
+            {% partial account ~ '::signin' %}
+            <h3>Registrate</h3>
+            {% partial account ~ '::register' %}
+            {% endif %}
+			</div> 
+		</div>
+	</div>
+</div>

@@ -1,0 +1,97 @@
+title = "Umi Profile"
+url = "/umi/profile"
+layout = "default"
+is_hidden = 0
+==
+<?php
+function onStart()
+{
+	if(!empty($_GET['username']) && isset($_GET['username']))
+	{
+
+		//try {
+			//$api = file_get_contents("http://api.instagram.com/".$_GET['username']."?__a=1");
+			$errors = false;
+		//}
+	//	catch (Exception $api) {
+		//	$this['like_user'] = 0;
+	//		$errors = true;
+	//	}
+
+		if($errors == false)
+		{
+			
+			//Supply a username
+			$my_account = $_GET['username']; 
+			//Do the deed
+			//$results_array = scrape_insta($my_account);
+			//An example of where to go from there
+			
+				$insta_source = file_get_contents('http://instagram.com/'.$my_account);
+				$shards = explode('window._sharedData = ', $insta_source);
+				$insta_json = explode(';</script>', $shards[1]); 
+				$insta_array = json_decode($insta_json[0], TRUE);
+		
+			$latest_array = $insta_array['entry_data']['ProfilePage'][0]['user']['media']['nodes'][0];
+			//echo 'Latest Photo:<br/>';
+			//echo '<a href="http://instagram.com/p/'.$latest_array['code'].'"><img src="'.$latest_array['display_src'].'"></a></br>';
+			//echo 'Likes: '.$latest_array['likes']['count'].' - Comments: '.$latest_array['comments']['count'].'<br/>';
+			
+			$this['WOW'] = '<a href="http://instagram.com/p/'.$latest_array['code'].'"><img src="'.$latest_array['display_src'].'"></a></br>';
+			$this['Likes'] = 'Likes: '.$latest_array['likes']['count'].' - Comments: '.$latest_array['comments']['count'].'<br/>';
+			
+				$this['like_user'] =1;
+			//$apiObj = json_decode($api,true);
+			//$profilePicUrl = $apiObj['profilePicUrl'];
+			//$mediaCount = $apiObj['mediaCount'];
+			/*$fullName = $apiObj['fullName'];
+			$isPrivate = $apiObj['isPrivate'];
+			$author_url = $apiObj['author_url'];
+			$externalUrl = $apiObj['externalUrl'];
+			$username = $apiObj['username'];
+			$biography = $apiObj['biography'];
+			$id = $apiObj['id'];
+			
+			$followedByCount = $apiObj['followedByCount'];
+			$followsCount = $apiObj['followsCount'];*/
+		}
+		else
+		{
+			$this['like_user'] = 0;
+		}
+	}
+}
+?>
+==
+<div class="container">
+	<div class="row">
+		
+		{% if like_user == 1 %}
+		
+		<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;height: 100vh;position: absolute;top: 0;bottom: 0;left: 0;right: 0;background-color: #282828;text-decoration: none;color: white;text-transform: uppercase;">
+			<!--username: {{username}}<br>
+			mediaCount: {{mediaCount}}<br>
+			fullName: {{fullName}}<br>
+			isPrivate: {{isPrivate}}<br>
+			author_url: {{author_url}}<br>
+			externalUrl: {{externalUrl}}<br>
+			biography: {{biography}}<br>
+			profilePicUrl: {{profilePicUrl}}<br>
+			id: {{id}}<br>
+			followedByCount: {{followedByCount}}<br>
+			followsCount: {{followsCount}}<br><br>
+			-->
+			{{WOW}} <br>
+			{{Likes}}
+			<a href="http://ud.esy.es" style="text-decoration: none;color: #9E9E9E;text-transform: uppercase;">Вернуться на главную</a>
+		</div>
+		
+		{% endif %}
+		
+		{% if like_user == 0 %}
+		
+			{% partial "instagram/error" %}
+		
+		{% endif %}
+	</div>
+</div>

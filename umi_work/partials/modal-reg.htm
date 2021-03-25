@@ -1,0 +1,36 @@
+[account]
+paramCode = "code"
+forceSecure = 0
+==
+<div class="modal fade" id="UModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">{% if not user %}Вход | Регистрация{% else %}Управление аккаунтом {% endif %}</h4>
+      </div>
+      <div class="modal-body">
+      	{% if not user %}
+      	<h4>Войти в аккаунт</h4>
+      	{% partial account ~ '::signin' %}
+      	<h4>Регистрация аккаунта</h4>
+        	{% partial account ~ '::register' %}
+        {% else %}
+					{% partial account ~ '::activation_check' %}
+						<div class="col-md-12 text-center">
+							<h3>Account : {{ user.name }}</h3>
+						</div>
+							<div class="col-md-12">
+								<div class="col-md-12">
+									{% partial account ~ '::update' %}
+								</div>
+							</div>
+							<a href="javascript:;" data-request="onLogout">Log Out</a>
+							{% endif %}
+				</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

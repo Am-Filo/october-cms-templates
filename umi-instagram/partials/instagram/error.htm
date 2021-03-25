@@ -1,0 +1,48 @@
+description = "errors"
+==
+<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;height: 100vh;position: absolute;top: 0;bottom: 0;left: 0;right: 0;background-color:#282828;text-decoration: none;color: white;text-transform: uppercase;">
+			<h3 style="padding-top: 10%;color:red;">Похоже что то пошло не так, попробуйте снова</h3>
+			<hr style="width: 30%;border: 1px solid white;height: 0px;">
+			<a href="http://ud.esy.es" style="text-decoration: none;color: #9E9E9E;text-transform: uppercase;">Вернуться на главную</a>
+			<!--p>Попробуйте установить расширение Tamplemonkey в браузер<br>далее создайте скрипт<br>скопируйте текст снизу и вставьте его туда<br>сохраните скрипт и перейдите в свой профиль инстаграма - перезагрузите страницу</p-->
+<!--pre style=" text-align:left;font-size:10px; background-color: white;color: black; padding: 15px 15px 15px 20%; text-decoration:none;border:none;box-shodow:none;">
+				{% filter escape %}
+				
+				// ==UserScript==
+				// @name         Umi-ins-likes-count
+				// @namespace    http://tampermonkey.net/
+				// @version      0.1
+				// @description  try to take over the world!
+				// @author       You
+				// @match        https://www.instagram.com/*
+				// @grant        none
+				// @require      https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+				// ==/UserScript==
+				
+				(function() {
+				rr = Math.floor(Math.random() * (255 - 1)) + 1;
+				rb = Math.floor(Math.random() * (255 - 1)) + 1;
+				rg = Math.floor(Math.random() * (255 - 1)) + 1;
+				$(document).ready(function() {
+				$('._nljxa').each(function(){
+				var row = $('._myci9 ._8mlbc', this);
+				var numRows = row.length;
+				//alert(numRows);
+				var arr = [];
+				var i = 0;
+				row.each(function(){
+				arr[i] = $(this).attr('href');
+				//alert(arr[i]);
+				numRows--;
+				$( "._bugdy").append( "<div></div><div style='width: 50px;height: 40px;text-align: center;padding: 7px 0 0 0;font-size: 12px;font-family: Helvetica;border: 0.5px solid pink;background-color: rgba("+rr+", "+rg+","+rb+", 0.13);position: relative;float: left;margin-left: 1px;'><a href='http://ud.esy.es/umiinslik?userurl=https://www.instagram.com"+arr[i]+"'>IMG "+(i+1)+"</a></div>");
+				i++;
+			});
+			//alert(arr);
+		});
+		
+	});
+	
+})();
+
+{% endfilter %}</pre-->
+</div>

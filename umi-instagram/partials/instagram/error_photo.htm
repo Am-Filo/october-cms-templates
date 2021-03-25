@@ -1,0 +1,9 @@
+description = "error photo , count photo = 0"
+==
+<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;height: 100vh;position: absolute;top: 0;bottom: 0;left: 0;right: 0;{% if rzz == 0 %}background-color: #282828;{% else %} background-color:red; {% endif %}text-decoration: none;color: white;text-transform: uppercase;">
+				<h3 style="padding-top: 10%;">К сожалению, {{author_name}}, вы исчерпали весь лимит для этого <span style="color:red;font-size:25px;">ПОСТА</span><!-- на сегодня<br>обновление каждый день в 12:00 и в 24:00 по москве!</h3>
+				<p>Накрутка лайков для данного поста приостановлена до сброса дневного лимита</p>-->
+				<a target="_blank" href="{{urlus}}"><img src="{{thumbnail_url}}" width="300px" alt=""></a>
+				<br>
+				<a style="text-decoration: none;color: #05daff;text-transform: uppercase;" target="_blank" href="http://www.instagram.com/{{author_name}}/">Перейти в свой профиль инстаграма и выбрать другой пост</a>
+			</div>

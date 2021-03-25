@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Champagne; /* Гарнитура шрифта */
+    src: url(fonts/champagne/ChampagneLimousines.ttf);
+}
+
+@font-face {
+    font-family: Cleary; /* Гарнитура шрифта */
+    font-weight: 100;
+    src: url(fonts/cleary/PrintClearly.otf);
+}

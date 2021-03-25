@@ -1,0 +1,42 @@
+@media (max-width: 2000px){
+	
+	.cont {
+		margin-top: 15%;
+	}
+	
+	.bpa{
+	padding-top: 35px;
+}
+	
+}
+
+@media (max-width: 1500px){
+	
+	.cont {
+		margin-top: 12%;
+	}
+}
+
+@media (max-width: 1030px){
+	
+	.cont {
+		margin-top: 10%;
+	}
+}
+
+@media (max-width: 990px){
+	.bpa{
+	padding-top: 0;
+	padding-bottom: 20px;
+	}
+	.cont {
+			margin-top: 12%;
+		}
+	}
+
+@media (max-width: 768px){
+	
+	.cont {
+		margin-top: 20%;
+	}
+}

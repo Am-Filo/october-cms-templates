@@ -1,0 +1,32 @@
+[viewBag]
+==
+<section id="header_umi">
+	<div class="container top_section">
+		<div class="row cont">
+			<div class="col-md-12 cont">
+				<div id="mainmenu">
+					<ul>
+						<li class="{% if this.page.title == 'Umi' %}active{% endif %}"><a href="{{ 'umi'|page }}">MAIN</a></li>
+						<li class="{% if this.page.title == 'Account' %}active{% endif %}">
+							{% if user %}<a onclick="UModal();" id="umreg" style="cursor:pointer;border: 1px solid #6acd5c;border-radius: 5px;text-transform: uppercase;">{{ user.name }}</a>{% else %}
+							<a onclick="UModal();" style="cursor:pointer" id="umreg">SINGIN</a>{% endif %}
+						</li>
+						<!-- <li class="{% if this.page.title == 'About' %}active{% endif %}"><a href="{{ 'about'|page }}">ABOUT</a></li> -->
+						{% if user %}
+						<li class="{% if this.page.title == 'Umigram' %}active{% endif %}"><a href="{{ 'umigram'|page }}">UMIGRAM</a></li>
+						{% endif %}
+					</ul>
+				</div>
+				<h1 class="title">Umi</h1>
+				<h3 class="sec_title">Coder | Programmer | Designer | Web-developer</h3>
+				<br>
+				<!-- <button data-toggle="tooltip" data-placement="left" title="Hooray!" class="btn view_btn">view my profile</button>
+				<button class="btn view_btn">view my profile</button> -->
+				<br>
+				<!--{% partial 'search_panel' %}-->
+				<i class="fa fa-chevron-down fa-2x nav_head" aria-hidden="true"></i>
+			</div>
+		</div>
+	</div>
+	
+</section>

@@ -1,0 +1,62 @@
+[viewBag]
+==
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script src="{{ ['assets/libr/bootstrap/bootstrap.js', 'assets/libr/bootstrap/bootstrap.min.js', 'assets/libr/fancybox/jquery.fancybox.pack.js', 'assets/js/common.js']|theme }}"></script>
+{% framework extras %}
+<script>
+
+function UModal() {
+	$('#UModal-1').modal('show');
+}
+
+$(document).ready(function() {
+	
+	//document.getElementById("umreg").onclick = function() {UModal()};
+
+	
+        $(function() {
+  $(".player").each(function(indx, pl){
+  var $aud = $(".audio", pl),
+      $pp  = $('.playpause', pl),
+      $vol = $('.volume', pl),
+      $bar = $(".progressbar", pl),
+      AUDIO= $aud[0];
+
+  AUDIO.volume = 0.30;
+  AUDIO.addEventListener("timeupdate", progress, false);
+
+  function getTime(t) {
+    var m=~~(t/60), s=~~(t % 60);
+    return (m<10?"0"+m:m)+':'+(s<10?"0"+s:s);
+  }
+
+  function progress() {
+    $bar.slider('value', ~~(100/AUDIO.duration*AUDIO.currentTime));
+    $pp.text(getTime(AUDIO.currentTime));
+  }
+
+  $vol.slider( {
+    value : AUDIO.volume*100,
+    slide : function(ev, ui) {
+      $vol.css({background:"hsla(0,"+ui.value+"%,58%,1)"});
+      AUDIO.volume = ui.value/100;
+    }
+  });
+
+  $bar.slider( {
+    value : AUDIO.currentTime,
+    slide : function(ev, ui) {
+      AUDIO.currentTime = AUDIO.duration/100*ui.value;
+    }
+  });
+
+  $pp.click(function() {
+    return AUDIO[AUDIO.paused?'play':'pause']();
+  });
+  });
+});
+
+ });
+    </script>

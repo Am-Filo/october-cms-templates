@@ -1,0 +1,16 @@
+[session]
+security = "all"
+==
+<html>
+<head>
+    {% partial "site/head" %}
+</head>
+<body>
+
+            {% page %}
+            
+        {% partial "all_pages/footer" %}
+    {% partial "site/scripts" %}
+</body>
+{% partial 'modal-reg' %}
+</html>

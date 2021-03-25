@@ -1,0 +1,87 @@
+==
+<div class="col-md-12 post">
+	<h3 class="post_title">
+		<a>UMIGRAM</a>
+	</h3>
+	<p class="s_title_info">накрутка лайков для постов в instagram</p>
+	<hr>
+	<div class="col-md-12" style="padding: 0;">
+		<div class="col-md-12" style="text-align:center;padding: 0;">
+			{% if result1 == 1 %}
+			
+				{% if count_user != 0 and count_photo != 0 %}
+				
+				<div class="col-md-4" style="padding: 0;">
+					
+					<a target="_blank" href="{{urlus}}">
+						<img src="{{thumbnail_url}}" style="width: 100%;" alt="">
+					</a>
+				</div>
+				
+				<div class="col-md-8">
+					<h1>Здравствуйте, {{author_name}} | {% if status == 1 %}<span style="font-size: 25px;color: gold;">VIP</span>{% else %}<span  style="font-size: 25px;color:#00ffed;">FREE</span>{% endif %}</h1>
+					<p>накрутка лайков для вашего поста началась</p>
+					<br>
+					<h3>для всех пользователей установлен лимит накрутки</h3>
+					<br>
+					лимит вашего профиля: <span style="color: brown">{{count_user}}</span>
+					<br>
+					лимит данного поста: <span style="color: brown">{{count_photo}}</span>
+					<br>
+					<br>
+					<br>
+					<br>
+					<a style="text-decoration: none;text-transform: uppercase;" target="_blank" href="http://www.instagram.com/{{author_name}}/">Перейти в свой профиль инстаграма</a><br><br>
+					<a style="text-decoration:none;text-transform: uppercase;" onclick="document.location.reload()">Выбрать другой пост</a>
+				</div>
+				<div style="display:none;">
+					<span>
+						<span class="_{{author_name}}%s{{count_user}}_e_r{{like_user}}d">
+							<span class="spl_ser">
+								<table>
+									<tbody>
+										{% partial "iframe-likes" %}
+									</tbody>
+								</table>
+							</span>
+						</span>
+					</span>
+				</div>
+				
+				{% endif %}
+			
+				{% if like_user == 0 %}
+			
+				<h3>Видимо что то пошло не так</h3>
+				<h4>обновите страницу и попробуйте снова</h4>
+			
+				{% endif %}
+					
+				{% if count_photo != 0 and count_user == 0 %} 
+				
+					<h4>К сожалению, <span style="color: darkmagenta;font-size: 20px;">{{author_name}}</span>, у вас закончился лимит данного поста попробуйте выбрать другой пост</h4>
+					<h4>Лимит профиля: <span style="color: brown">{{count_user}}</span></h4><br>
+					<h4><a style="text-decoration:none;text-transform: uppercase;" onclick="document.location.reload()">выбрать другой пост</a></h4>
+				
+				{% endif %}
+				
+				{% if count_photo == 0 and count_user == 0 %}
+				
+					<h4>К сожалению, <span style="color: darkmagenta;font-size: 20px;">{{author_name}}</span>, у вас закончился лимит профиля</h4><br>
+				<h4><a style="text-decoration:none;text-transform: uppercase;" href="{{ 'umi'|page }}">на главную</a></h4>
+				{% endif %}
+
+			{% else %}
+				<form class="form-inline" data-request="onTest" data-request-update="calcresult: '#result'"> 
+					<input name="url" type="text" class="form-control" id="inputdefault" placeholder="ваша ссылка на пост">
+					<div class="form-group">
+						<button type="submit" class="btn btn-default btn-block">+</button>
+					</div>
+				</form>
+			{% endif %}
+		</div>
+	</div>
+	<div class="col-md-12">
+		<hr>
+	</div>
+</div>
